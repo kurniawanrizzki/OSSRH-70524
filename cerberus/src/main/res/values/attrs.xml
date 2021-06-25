@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExtendedTextView">
+        <attr name="typography" format="enum">
+            <enum name="h1" value="0"/>
+            <enum name="h2" value="1"/>
+            <enum name="h3" value="2"/>
+            <enum name="h4" value="3"/>
+            <enum name="h5" value="4"/>
+            <enum name="h6" value="5"/>
+            <enum name="subtitle_1" value="6"/>
+            <enum name="subtitle_2" value="7"/>
+            <enum name="body_1" value="8"/>
+            <enum name="body_2" value="9"/>
+            <enum name="button" value="10"/>
+            <enum name="caption" value="11"/>
+            <enum name="overline" value="12"/>
+        </attr>
+        <attr name="android:textColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="ConstraintWithIllustrationLayout">
+        <attr name="illustration_src"/>
+        <attr name="illustration_title"/>
+        <attr name="illustration_description"/>
+        <attr name="illustration_visibility" format="enum">
+            <!-- Visible on screen; the default value. -->
+            <enum name="visible" value="0x00000000" />
+            <!-- Completely hidden, as if the view had not been added. -->
+            <enum name="gone" value="0x00000008" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="IllustrationView">
+        <attr name="illustration_src"/>
+        <attr name="illustration_title"/>
+        <attr name="illustration_description"/>
+    </declare-styleable>
+
+    <attr name="illustration_src" format="reference"/>
+    <attr name="illustration_title" format="string"/>
+    <attr name="illustration_description" format="string"/>
+</resources>

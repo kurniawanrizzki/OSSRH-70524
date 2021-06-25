@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="cwi_parent_id" type="id"/>
+    <item name="cwi_illustration_id" type="id"/>
+    <item name="cwi_container_id" type="id"/>
+</resources>

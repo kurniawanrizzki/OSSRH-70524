@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="font_style"></string>
+    <string name="light_font_style"></string>
+    <string name="normal_font_style"></string>
+    <string name="medium_font_style"></string>
+</resources>
