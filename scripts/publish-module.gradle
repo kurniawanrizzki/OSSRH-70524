@@ -1,0 +1,76 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    if (project.plugins.findPlugin("com.android.library")) {
+        from android.sourceSets.main.java.srcDirs
+        from android.sourceSets.main.kotlin.srcDirs
+    } else {
+        from sourceSets.main.java.srcDirs
+        from sourceSets.main.kotlin.srcDirs
+    }
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
+group = PUBLISH_GROUP_ID
+version = PUBLISH_VERSION
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId PUBLISH_GROUP_ID
+                artifactId PUBLISH_ARTIFACT_ID
+                version PUBLISH_VERSION
+
+                if (project.plugins.findPlugin("com.android.library")) {
+                    from components.release
+                } else {
+                    from components.java
+                }
+
+                artifact androidSourcesJar
+
+                pom {
+                    name = PUBLISH_ARTIFACT_ID
+                    description = "This library help the developer to build an android app easier and faster"
+                    url = "https://github.com/kurniawanrizzki/OSSRH-70524"
+
+                    developers {
+                        developer {
+                            id = "kurniawanrizzki"
+                            name = "M. Rizki Kurniawan"
+                            email = "kurniawanrizzki@gmail.com"
+                        }
+                    }
+
+                    licenses {
+                        license {
+                            name = "Cerberus License"
+                            url = "https://github.com/kurniawanrizzki/OSSRH-70524/blob/master/README.md"
+                        }
+                    }
+
+                    scm {
+                        connection = "scm:git:github.com/kurniawanrizzki/OSSRH-70524.git"
+                        developerConnection = "scm:git:ssh://github.com/kurniawanrizzki/OSSRH-70524.git"
+                        url = "https://github.com/kurniawanrizzki/OSSRH-70524"
+                    }
+                }
+            }
+        }
+    }
+}
+
+signing {
+    useInMemoryPgpKeys(
+            rootProject.ext["signing.keyId"],
+            rootProject.ext["signing.key"],
+            rootProject.ext["signing.password"],
+    )
+    sign publishing.publications
+}
