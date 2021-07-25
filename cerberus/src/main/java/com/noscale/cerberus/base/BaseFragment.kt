@@ -1,6 +1,5 @@
 package com.noscale.cerberus.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,25 +15,21 @@ open class BaseFragment: Fragment() {
 
     open var mLayoutResource: Int = R.layout.fragment_base
 
-    var mListener: OnFragmentInteractionListener? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(mLayoutResource, container, false)
 
-    override fun onAttach(context: Context) {
-        if (context is OnFragmentInteractionListener) mListener = context
-        super.onAttach(context)
-    }
-
     override fun onResume() {
         super.onResume()
-        mListener?.onInteract()
+        onPresent()
     }
 
-    interface OnFragmentInteractionListener {
-        fun onInteract ()
+    private fun onPresent () {
+        if (this is BaseView<*>) {
+            val v = this as BaseView<*>
+            v?.mPresenter?.start()
+        }
     }
 }
