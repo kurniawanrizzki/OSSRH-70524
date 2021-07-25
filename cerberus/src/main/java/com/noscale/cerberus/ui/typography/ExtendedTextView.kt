@@ -25,28 +25,31 @@ class ExtendedTextView @JvmOverloads constructor(
         val ta: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.ExtendedTextView, defStyleAttr, 0)
         val typography = ta.getInt(R.styleable.ExtendedTextView_typography, BODY_1)
         val textColor = ta.getColor(R.styleable.ExtendedTextView_android_textColor, ContextCompat.getColor(context, R.color.black))
+        val textAlignment = ta.getColor(R.styleable.ExtendedTextView_android_textAlignment, TEXT_ALIGNMENT_TEXT_START)
 
         when (typography) {
-            HEADLINE_1 -> applyStyle(R.string.light_font_style, R.style.TextAppearance_MaterialComponents_Headline1, textColor)
-            HEADLINE_2 -> applyStyle(R.string.light_font_style, R.style.TextAppearance_MaterialComponents_Headline2, textColor)
-            HEADLINE_3 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Headline3, textColor)
-            HEADLINE_4 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Headline4, textColor)
-            HEADLINE_5 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Headline5, textColor)
-            HEADLINE_6 -> applyStyle(R.string.medium_font_style, R.style.TextAppearance_MaterialComponents_Headline6, textColor)
-            SUBTITLE_1 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Subtitle1, textColor)
-            SUBTITLE_2 -> applyStyle(R.string.medium_font_style, R.style.TextAppearance_MaterialComponents_Subtitle2, textColor)
-            BODY_2 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Body2, textColor)
-            BUTTON -> applyStyle(R.string.medium_font_style, R.style.TextAppearance_MaterialComponents_Button, textColor)
-            CAPTION -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Caption, textColor)
-            OVERLINE -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Overline, textColor)
-            else -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Body1, textColor)
+            HEADLINE_1 -> applyStyle(R.string.light_font_style, R.style.TextAppearance_MaterialComponents_Headline1)
+            HEADLINE_2 -> applyStyle(R.string.light_font_style, R.style.TextAppearance_MaterialComponents_Headline2)
+            HEADLINE_3 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Headline3)
+            HEADLINE_4 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Headline4)
+            HEADLINE_5 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Headline5)
+            HEADLINE_6 -> applyStyle(R.string.medium_font_style, R.style.TextAppearance_MaterialComponents_Headline6)
+            SUBTITLE_1 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Subtitle1)
+            SUBTITLE_2 -> applyStyle(R.string.medium_font_style, R.style.TextAppearance_MaterialComponents_Subtitle2)
+            BODY_2 -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Body2)
+            BUTTON -> applyStyle(R.string.medium_font_style, R.style.TextAppearance_MaterialComponents_Button)
+            CAPTION -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Caption)
+            OVERLINE -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Overline)
+            else -> applyStyle(R.string.normal_font_style, R.style.TextAppearance_MaterialComponents_Body1)
         }
+
+        setTextColor(textColor)
+        setTextAlignment(textAlignment)
     }
 
-    private fun applyStyle (fontAppearance: Int, textAppearance: Int, textColor: Int) {
+    private fun applyStyle (fontAppearance: Int, textAppearance: Int) {
         val customTypeface = getLightTypography(context, fontAppearance)
         setTextAppearance(textAppearance)
-        setTextColor(textColor)
 
         customTypeface?.let {
             typeface = it

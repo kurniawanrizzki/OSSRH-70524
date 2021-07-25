@@ -15,11 +15,18 @@ open class BaseFragment: Fragment() {
 
     open var mLayoutResource: Int = R.layout.fragment_base
 
+    private var baseActivity: BaseActivity<*, *>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(mLayoutResource, container, false)
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        baseActivity = activity as BaseActivity<*, *>
+    }
 
     override fun onResume() {
         super.onResume()

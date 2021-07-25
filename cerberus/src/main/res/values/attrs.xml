@@ -17,6 +17,7 @@
             <enum name="overline" value="12"/>
         </attr>
         <attr name="android:textColor"/>
+        <attr name="android:textAlignment"/>
     </declare-styleable>
 
     <declare-styleable name="ConstraintWithIllustrationLayout">

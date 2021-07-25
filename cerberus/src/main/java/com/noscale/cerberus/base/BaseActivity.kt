@@ -31,6 +31,12 @@ open class BaseActivity<V: BaseView<P>, P: BasePresenter>: AppCompatActivity() {
             bindIllustrationDescription(field)
         }
 
+    protected var showIllustration: Boolean = true
+        set(value) {
+            field = value
+            bindIllustrationVisibility(field)
+        }
+
     open var mArguments: Bundle? = null
 
     open var mView: V? = null
@@ -51,11 +57,6 @@ open class BaseActivity<V: BaseView<P>, P: BasePresenter>: AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
-    fun showIllustration (show: Boolean) {
-        val container = findViewById<ConstraintWithIllustrationLayout>(R.id.cwi_parent_id)
-        container.setIllustrationVisibility(show)
-    }
-
     private fun applyFragment () {
         mView?.let {
             val ft = supportFragmentManager.beginTransaction()
@@ -65,21 +66,27 @@ open class BaseActivity<V: BaseView<P>, P: BasePresenter>: AppCompatActivity() {
         bindIllustrationSrc(mIllustrationSrc)
         bindIllustrationTitle(mIllustrationTitle)
         bindIllustrationDescription(mIllustrationDescription)
+        bindIllustrationVisibility(showIllustration)
     }
 
     private fun bindIllustrationSrc (field: Int?) {
         val container = findViewById<ConstraintWithIllustrationLayout>(R.id.cwi_parent_id)
-        container.setIllustrationSrc(field)
+        container?.setIllustrationSrc(field)
     }
 
     private fun bindIllustrationTitle (field: Int?) {
         val container = findViewById<ConstraintWithIllustrationLayout>(R.id.cwi_parent_id)
-        container.setIllustrationTitle(field?.let { getString(it) })
+        container?.setIllustrationTitle(field?.let { getString(it) })
     }
 
     private fun bindIllustrationDescription (field: Int?) {
         val container = findViewById<ConstraintWithIllustrationLayout>(R.id.cwi_parent_id)
-        container.setIllustrationDescription(field?.let { getString(it) })
+        container?.setIllustrationDescription(field?.let { getString(it) })
+    }
+
+    private fun bindIllustrationVisibility (field: Boolean) {
+        val container = findViewById<ConstraintWithIllustrationLayout>(R.id.cwi_parent_id)
+        container?.setIllustrationVisibility(field)
     }
 
     protected fun shouldLoadFromRepository (outState: Bundle?): Boolean =
