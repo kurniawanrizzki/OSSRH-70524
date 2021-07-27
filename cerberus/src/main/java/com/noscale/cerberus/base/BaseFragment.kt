@@ -17,6 +17,12 @@ open class BaseFragment: Fragment() {
 
     private var baseActivity: BaseActivity<*, *>? = null
 
+    protected var showIllustration: Boolean = baseActivity?.showIllustration ?: true
+        set(value) {
+            field = value
+            baseActivity?.showIllustration = field
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

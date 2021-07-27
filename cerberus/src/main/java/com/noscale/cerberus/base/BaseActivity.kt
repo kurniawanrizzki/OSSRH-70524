@@ -31,7 +31,7 @@ open class BaseActivity<V: BaseView<P>, P: BasePresenter>: AppCompatActivity() {
             bindIllustrationDescription(field)
         }
 
-    protected var showIllustration: Boolean = true
+    var showIllustration: Boolean = true
         set(value) {
             field = value
             bindIllustrationVisibility(field)
