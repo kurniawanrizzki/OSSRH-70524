@@ -1,6 +1,9 @@
 package com.noscale.cerberus.base
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.noscale.cerberus.R
 import com.noscale.cerberus.ui.layouts.ConstraintWithIllustrationLayout
@@ -91,6 +94,11 @@ open class BaseActivity<V: BaseView<P>, P: BasePresenter>: AppCompatActivity() {
 
     protected fun shouldLoadFromRepository (outState: Bundle?): Boolean =
         outState?.getBoolean(SHOULD_LOAD_FROM_REPOSITORY) ?: true
+
+    fun hideKeyboard (v: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(v.applicationWindowToken, 0);
+    }
 
     companion object {
         const val SHOULD_LOAD_FROM_REPOSITORY = "SHOULD_LOAD_FROM_REPOSITORY"
